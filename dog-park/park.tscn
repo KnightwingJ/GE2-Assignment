@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://cv5cllbutu8xx"]
+
+[ext_resource type="Script" uid="uid://b04jvh546k2aa" path="res://scripts/first_person_controller.gd" id="1_pccfp"]
+
+[sub_resource type="Sky" id="Sky_ogds0"]
+
+[sub_resource type="Environment" id="Environment_pccfp"]
+background_mode = 1
+background_color = Color(0.3888, 0.65376, 0.72, 1)
+sky = SubResource("Sky_ogds0")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_20hy8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ew778"]
+albedo_color = Color(0.20515, 0.55, 0.187, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lcr5t"]
+material = SubResource("StandardMaterial3D_ew778")
+size = Vector2(100, 100)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_20hy8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pccfp"]
+height = 2.64282
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_20hy8"]
+albedo_color = Color(0.529412, 0.243137, 0.137255, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ew778"]
+material = SubResource("StandardMaterial3D_20hy8")
+height = 2.643
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pccfp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_20hy8")
+debug_color = Color(1, 1, 1, 0.42)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_lcr5t")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.73527, 0)
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00556, 0)
+script = ExtResource("1_pccfp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_20hy8")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+
+[node name="Tree" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.33101)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47631, 0)
+shape = SubResource("CylinderShape3D_pccfp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50826, 0)
+mesh = SubResource("CylinderMesh_ew778")
