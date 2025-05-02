@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://im4wm4x15rs4"]
+[gd_scene load_steps=8 format=3 uid="uid://im4wm4x15rs4"]
+
+[ext_resource type="Script" uid="uid://b45v6vqkrna84" path="res://models/dog.gd" id="1_3eaof"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmxnr"]
 albedo_color = Color(0.57, 0.36974, 0.1824, 1)
@@ -18,67 +20,74 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0, 0, 0, 1)
 
-[node name="Dog" type="Node3D"]
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_3eaof")
+arrive_enabled = false
+player_steering_enabled = false
+pursue_enabled = false
+path_follow_enabled = false
 
-[node name="Body" type="CSGBox3D" parent="."]
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+
+[node name="Body" type="CSGBox3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 size = Vector3(1.2, 0.8, 2)
 material = SubResource("StandardMaterial3D_vmxnr")
 
-[node name="Head" type="CSGBox3D" parent="."]
+[node name="Head" type="CSGBox3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 1.2)
 size = Vector3(0.7, 0.6, 0.6)
 
-[node name="Snout" type="CSGBox3D" parent="."]
+[node name="Snout" type="CSGBox3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 1.6)
 size = Vector3(0.4, 0.3, 0.4)
 
-[node name="LegFrontRight" type="CSGCylinder3D" parent="."]
+[node name="LegFrontRight" type="CSGCylinder3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -0.6)
 radius = 0.15
 height = 0.8
 
-[node name="LegFrontLeft" type="CSGCylinder3D" parent="."]
+[node name="LegFrontLeft" type="CSGCylinder3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -0.6)
 radius = 0.15
 height = 0.8
 
-[node name="LegBackRight" type="CSGCylinder3D" parent="."]
+[node name="LegBackRight" type="CSGCylinder3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0.6)
 radius = 0.15
 height = 0.8
 
-[node name="LegBackLeft" type="CSGCylinder3D" parent="."]
+[node name="LegBackLeft" type="CSGCylinder3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0.6)
 radius = 0.15
 height = 0.8
 
-[node name="Tail" type="CSGCylinder3D" parent="."]
+[node name="Tail" type="CSGCylinder3D" parent="CollisionPolygon3D"]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0.7, -1.2)
 radius = 0.1
 height = 0.8
 
-[node name="EarRight" type="CSGBox3D" parent="."]
+[node name="EarRight" type="CSGBox3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.2, 1.2)
 size = Vector3(0.15, 0.3, 0.15)
 material = SubResource("StandardMaterial3D_3eaof")
 
-[node name="EarLeft" type="CSGBox3D" parent="."]
+[node name="EarLeft" type="CSGBox3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.2, 1.2)
 size = Vector3(0.15, 0.3, 0.15)
 material = SubResource("StandardMaterial3D_60ffh")
 
-[node name="EyeRight" type="CSGSphere3D" parent="."]
+[node name="EyeRight" type="CSGSphere3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.9, 1.49259)
 radius = 0.05
 material = SubResource("StandardMaterial3D_1")
 
-[node name="EyeLeft" type="CSGSphere3D" parent="."]
+[node name="EyeLeft" type="CSGSphere3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.9, 1.48907)
 radius = 0.05
 material = SubResource("StandardMaterial3D_2")
 
-[node name="Nose" type="CSGSphere3D" parent="."]
+[node name="Nose" type="CSGSphere3D" parent="CollisionPolygon3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 1.8)
 radius = 0.08
 material = SubResource("StandardMaterial3D_3")

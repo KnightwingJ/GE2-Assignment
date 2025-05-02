@@ -1,6 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cv5cllbutu8xx"]
+[gd_scene load_steps=18 format=3 uid="uid://cv5cllbutu8xx"]
 
+[ext_resource type="Script" uid="uid://bidt4uptxh1bc" path="res://park.gd" id="1_ew778"]
 [ext_resource type="Script" uid="uid://b04jvh546k2aa" path="res://scripts/first_person_controller.gd" id="1_pccfp"]
+[ext_resource type="PackedScene" uid="uid://im4wm4x15rs4" path="res://models/dog-scene.tscn" id="2_lcr5t"]
+[ext_resource type="AudioStream" uid="uid://qkjevqh36th6" path="res://sounds/calling-whistle-41861.mp3" id="4_lcr5t"]
 
 [sub_resource type="Sky" id="Sky_ogds0"]
 
@@ -16,9 +19,7 @@ albedo_color = Color(0.20515, 0.55, 0.187, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lcr5t"]
 material = SubResource("StandardMaterial3D_ew778")
-size = Vector2(100, 100)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_20hy8"]
+size = Vector2(50, 50)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_pccfp"]
 height = 2.64282
@@ -30,7 +31,30 @@ albedo_color = Color(0.529412, 0.243137, 0.137255, 1)
 material = SubResource("StandardMaterial3D_20hy8")
 height = 2.643
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_ew778"]
+radius = 1.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcr5t"]
+albedo_color = Color(0.372549, 0.607843, 0.0470588, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_uktj1"]
+material = SubResource("StandardMaterial3D_lcr5t")
+radius = 1.4
+height = 2.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_20hy8"]
+
+[sub_resource type="Curve3D" id="Curve3D_lcr5t"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 19.5398, 0, 0, -0.26, 0, 0, 0, -37.3469, 0, -5.2561, 0, 0, 0, 0, 0, 0, 0, 0, -15.3655),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_ew778")
+dog = ExtResource("2_lcr5t")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pccfp")
@@ -47,22 +71,130 @@ mesh = SubResource("PlaneMesh_lcr5t")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.73527, 0)
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00556, 0)
-script = ExtResource("1_pccfp")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("CapsuleShape3D_20hy8")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-
 [node name="Tree" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.33101)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.4034, 1.47621, -9.28696)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47631, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
 shape = SubResource("CylinderShape3D_pccfp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50826, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20481, 0)
 mesh = SubResource("CylinderMesh_ew778")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41854, 0)
+shape = SubResource("SphereShape3D_ew778")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree/CollisionShape3D2"]
+mesh = SubResource("SphereMesh_uktj1")
+
+[node name="Tree2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5277, 1.47621, -14.2995)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
+shape = SubResource("CylinderShape3D_pccfp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20481, 0)
+mesh = SubResource("CylinderMesh_ew778")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Tree2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41854, 0)
+shape = SubResource("SphereShape3D_ew778")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree2/CollisionShape3D2"]
+mesh = SubResource("SphereMesh_uktj1")
+
+[node name="Tree3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5124, 1.47621, 13.7289)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
+shape = SubResource("CylinderShape3D_pccfp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20481, 0)
+mesh = SubResource("CylinderMesh_ew778")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Tree3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41854, 0)
+shape = SubResource("SphereShape3D_ew778")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree3/CollisionShape3D2"]
+mesh = SubResource("SphereMesh_uktj1")
+
+[node name="Tree4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3244, 1.47621, 10.0204)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
+shape = SubResource("CylinderShape3D_pccfp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20481, 0)
+mesh = SubResource("CylinderMesh_ew778")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Tree4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41854, 0)
+shape = SubResource("SphereShape3D_ew778")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree4/CollisionShape3D2"]
+mesh = SubResource("SphereMesh_uktj1")
+
+[node name="Tree5" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3207, 1.47621, 0.391556)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
+shape = SubResource("CylinderShape3D_pccfp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20481, 0)
+mesh = SubResource("CylinderMesh_ew778")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Tree5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41854, 0)
+shape = SubResource("SphereShape3D_ew778")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree5/CollisionShape3D2"]
+mesh = SubResource("SphereMesh_uktj1")
+
+[node name="Tree6" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47621, -18.7039)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
+shape = SubResource("CylinderShape3D_pccfp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20481, 0)
+mesh = SubResource("CylinderMesh_ew778")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Tree6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41854, 0)
+shape = SubResource("SphereShape3D_ew778")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree6/CollisionShape3D2"]
+mesh = SubResource("SphereMesh_uktj1")
+
+[node name="PlayerBody" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00555056, 0)
+script = ExtResource("1_pccfp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBody"]
+shape = SubResource("CapsuleShape3D_20hy8")
+
+[node name="Head" type="Node3D" parent="PlayerBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61624, 0)
+
+[node name="Camera3D" type="Camera3D" parent="PlayerBody/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0589895, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="PlayerBody"]
+stream = ExtResource("4_lcr5t")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1298, 0.0453509, -0.020849)
+curve = SubResource("Curve3D_lcr5t")

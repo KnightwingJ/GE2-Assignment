@@ -11,6 +11,8 @@ extends CharacterBody3D
 var pitch := 0.0
 var velocity_y := 0.0
 
+@onready var head := $Head
+@onready var whistle_player:=$AudioStreamPlayer3D
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -19,10 +21,9 @@ func _input(event):
 		# Rotate character (yaw)
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 
-		# Rotate head (pitch)
-		pitch -= event.relative.y * mouse_sensitivity
-		pitch = clamp(pitch, -90, 90)
-
+		# Pitch (up/down) - rotate the head only
+		pitch = clamp(pitch - event.relative.y * mouse_sensitivity, -90, 90)
+		head.rotation_degrees.x = pitch
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -40,8 +41,8 @@ func _physics_process(delta):
 		input_dir += right
 	if Input.is_action_pressed("move_left"):
 		input_dir -= right
-
-	input_dir = input_dir.normalized()
+	input_dir = input_dir.normalized()	
+	
 
 	var speed = move_speed
 	if Input.is_action_pressed("sprint"):
@@ -63,3 +64,6 @@ func _physics_process(delta):
 	velocity.z = horizontal_velocity.z
 
 	move_and_slide()
+	if Input.is_action_just_pressed("whistle"):
+		whistle_player.play()
+		print("Whistle")
