@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://im4wm4x15rs4"]
 
-[ext_resource type="Script" uid="uid://b45v6vqkrna84" path="res://models/dog.gd" id="1_3eaof"]
+[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://scripts/behaviors/boid.gd" id="1_3eaof"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmxnr"]
 albedo_color = Color(0.57, 0.36974, 0.1824, 1)
@@ -20,12 +20,8 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0, 0, 0, 1)
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="Dog" type="CharacterBody3D"]
 script = ExtResource("1_3eaof")
-arrive_enabled = false
-player_steering_enabled = false
-pursue_enabled = false
-path_follow_enabled = false
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
 

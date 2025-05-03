@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cv5cllbutu8xx"]
+[gd_scene load_steps=19 format=3 uid="uid://cv5cllbutu8xx"]
 
 [ext_resource type="Script" uid="uid://bidt4uptxh1bc" path="res://park.gd" id="1_ew778"]
 [ext_resource type="Script" uid="uid://b04jvh546k2aa" path="res://scripts/first_person_controller.gd" id="1_pccfp"]
-[ext_resource type="PackedScene" uid="uid://im4wm4x15rs4" path="res://models/dog-scene.tscn" id="2_lcr5t"]
+[ext_resource type="PackedScene" uid="uid://im4wm4x15rs4" path="res://scripts/behaviors/dog-scene.tscn" id="2_lcr5t"]
 [ext_resource type="AudioStream" uid="uid://qkjevqh36th6" path="res://sounds/calling-whistle-41861.mp3" id="4_lcr5t"]
+[ext_resource type="Script" uid="uid://baw56rnhj0aqm" path="res://scripts/behaviors/wander.gd" id="5_uktj1"]
 
 [sub_resource type="Sky" id="Sky_ogds0"]
 
@@ -198,3 +199,10 @@ stream = ExtResource("4_lcr5t")
 [node name="Path3D" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1298, 0.0453509, -0.020849)
 curve = SubResource("Curve3D_lcr5t")
+
+[node name="Dog" parent="." instance=ExtResource("2_lcr5t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.39983)
+
+[node name="Wander" type="Node" parent="Dog"]
+script = ExtResource("5_uktj1")
+metadata/_custom_type_script = "uid://baw56rnhj0aqm"
