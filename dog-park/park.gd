@@ -37,24 +37,31 @@ func _process(delta: float):
 		throw_ball()
 func heel():
 	for dog_instance in dogs:
-			dog_instance.path_follow_enabled=false
-			dog_instance.wander_enable=false
-			dog_instance.seek_enabled = false
-			dog_instance.arrive_enabled=true
+			dog_instance.set_behaviours({
+			"seek": false,
+			"arrive": true,
+			"wander": false,
+			"path": false
+		})
 			dog_instance.arrive_target=$PlayerBody
 
 func run():
 	for dog_instance in dogs:
-			dog_instance.wander_enable=true
-			dog_instance.arrive_enabled=false
-			dog_instance.seek_enabled = false
+			dog_instance.set_behaviours({
+			"seek": false,
+			"arrive": false,
+			"wander": true,
+			"path": false
+		})
 
 func go():
 	for dog_instance in dogs:
-		dog_instance.wander_enable=false
-		dog_instance.arrive_enabled=false
-		dog_instance.seek_enabled = false
-		dog_instance.path_follow_enabled=true
+		dog_instance.set_behaviours({
+			"seek": false,
+			"arrive": false,
+			"wander": false,
+			"path": true
+		})
 		dog_instance.path=$Path3D
 		
 func throw_ball():
@@ -81,8 +88,10 @@ func _on_ball_resting(position: Vector3):
 	add_child(temp_target)  # Add it to the scene so it's valid
 
 	for dog_instance in dogs:
-		dog_instance.wander_enable = false
-		dog_instance.arrive_enabled = false
-		dog_instance.path_follow_enabled = false
-		dog_instance.seek_enabled = true
+		dog_instance.set_behaviours({
+			"seek": true,
+			"arrive": false,
+			"wander": false,
+			"path": false
+		})
 		dog_instance.target = temp_target

@@ -88,7 +88,7 @@ shadow_enabled = true
 omni_range = 17.631
 
 [node name="Tree" type="StaticBody3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9.4034, 1.47621, -9.28696)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -13.4258, 1.47621, -11.5488)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tree"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
@@ -160,7 +160,7 @@ shape = SubResource("SphereShape3D_ew778")
 mesh = SubResource("SphereMesh_uktj1")
 
 [node name="Tree5" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3207, 1.47621, 0.391556)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3207, 1.47621, 19.0121)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tree5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)

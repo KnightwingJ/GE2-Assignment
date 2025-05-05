@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://im4wm4x15rs4"]
+[gd_scene load_steps=10 format=3 uid="uid://im4wm4x15rs4"]
 
 [ext_resource type="Script" uid="uid://b45v6vqkrna84" path="res://models/dog.gd" id="1_3eaof"]
+[ext_resource type="AudioStream" uid="uid://cay5u1roye8nb" path="res://sounds/dog-bark-179915.mp3" id="2_60ffh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3eaof"]
 size = Vector3(1.2, 0.8, 2)
@@ -96,3 +97,6 @@ material = SubResource("StandardMaterial3D_2")
 transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, -0.056665, 0.0253345, 1.79911)
 radius = 0.08
 material = SubResource("StandardMaterial3D_3")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_60ffh")
