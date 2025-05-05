@@ -19,4 +19,4 @@ When I compare my project to this reference video, I do feel that my work is mis
 All things considered, I feel that this project turned out to be a success. Although there is definitely room for improvement in various aspects, I believe I was able to effectively implement the different behaviours I had planned. Through this process, I not only gained a better understanding of how these behaviours can be programmed and made to interact, but I also developed a much stronger grasp of using the Godot engine as a whole. This project was a valuable learning experience for me, both in terms of technical skills and in understanding how to bring more life and responsiveness to the elements within a game or simulation
 
 ## Video Demo
-[![Video](http://img.youtube.com/vi/v=7xuTYCxqueo/0.img)](https://www.youtube.com/watch?v=7xuTYCxqueo)
+[![Video](https://img.youtube.com/vi/7xuTYCxqueo/0.jpg)](https://www.youtube.com/watch?v=7xuTYCxqueo)
