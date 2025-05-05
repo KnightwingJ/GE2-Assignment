@@ -124,7 +124,7 @@ shape = SubResource("SphereShape3D_ew778")
 mesh = SubResource("SphereMesh_uktj1")
 
 [node name="Tree3" type="StaticBody3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 9.5124, 1.47621, 13.7289)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6.47184, 1.47621, 13.7289)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tree3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
@@ -160,7 +160,7 @@ shape = SubResource("SphereShape3D_ew778")
 mesh = SubResource("SphereMesh_uktj1")
 
 [node name="Tree5" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3207, 1.47621, 19.0121)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3207, 1.47621, 9.21145)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tree5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
