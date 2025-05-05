@@ -8,6 +8,8 @@ extends Node3D
 @onready var heeled=false
 var dog_instance
 var dogs=[]
+@onready var timer=$Timer
+
 
 func _ready() -> void:
 	for i in range(dog_count):
@@ -19,6 +21,8 @@ func _ready() -> void:
 				)
 		dog_instance.position=position+random_position
 		add_child(dog_instance)
+		randomize()
+		timer.start()
 		#dog_instance.path_follow_enabled=true
 		#dog_instance.path=$Path3D
 		
@@ -35,6 +39,8 @@ func _process(delta: float):
 		go()
 	if Input.is_action_just_pressed("throw"):
 		throw_ball()
+		
+
 func heel():
 	for dog_instance in dogs:
 			dog_instance.set_behaviours({
@@ -44,6 +50,7 @@ func heel():
 			"path": false
 		})
 			dog_instance.arrive_target=$PlayerBody
+	timer.stop
 
 func run():
 	for dog_instance in dogs:
@@ -53,6 +60,7 @@ func run():
 			"wander": true,
 			"path": false
 		})
+	timer.start()
 
 func go():
 	for dog_instance in dogs:
@@ -63,6 +71,7 @@ func go():
 			"path": true
 		})
 		dog_instance.path=$Path3D
+	timer.stop
 		
 func throw_ball():
 	if not ball:
@@ -95,3 +104,34 @@ func _on_ball_resting(position: Vector3):
 			"path": false
 		})
 		dog_instance.target = temp_target
+
+
+func _on_timer_timeout() -> void:
+	var random_dog = dogs[randi()%dogs.size()]
+	var behavivour_index=randi() % 3
+	match behavivour_index:
+		0:
+			dog_instance.set_behaviours({
+			"seek": false,
+			"arrive": true,
+			"wander": false,
+			"path": false
+			})
+			dog_instance.arrive_target=$PlayerBody
+		1:
+			dog_instance.set_behaviours({
+			"seek": false,
+			"arrive": false,
+			"wander": true,
+			"path": false
+			})
+		2:
+			dog_instance.set_behaviours({
+			"seek": false,
+			"arrive": false,
+			"wander": false,
+			"path": true
+			})
+			dog_instance.path=$Path3D
+	
+	pass # Replace with function body.
