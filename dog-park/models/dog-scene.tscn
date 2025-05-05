@@ -1,6 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://im4wm4x15rs4"]
+[gd_scene load_steps=9 format=3 uid="uid://im4wm4x15rs4"]
 
 [ext_resource type="Script" uid="uid://b45v6vqkrna84" path="res://models/dog.gd" id="1_3eaof"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3eaof"]
+size = Vector3(1.2, 0.8, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmxnr"]
 albedo_color = Color(0.57, 0.36974, 0.1824, 1)
@@ -27,67 +30,69 @@ player_steering_enabled = false
 pursue_enabled = false
 path_follow_enabled = false
 
-[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.624665, 0)
+shape = SubResource("BoxShape3D_3eaof")
 
-[node name="Body" type="CSGBox3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+[node name="Body" type="CSGBox3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, 0, -0.0246655, 0)
 size = Vector3(1.2, 0.8, 2)
 material = SubResource("StandardMaterial3D_vmxnr")
 
-[node name="Head" type="CSGBox3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 1.2)
+[node name="Head" type="CSGBox3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, -0.0377766, 0.175335, 1.19941)
 size = Vector3(0.7, 0.6, 0.6)
 
-[node name="Snout" type="CSGBox3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 1.6)
+[node name="Snout" type="CSGBox3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, -0.0503689, 0.0253345, 1.59921)
 size = Vector3(0.4, 0.3, 0.4)
 
-[node name="LegFrontRight" type="CSGCylinder3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -0.6)
+[node name="LegFrontRight" type="CSGCylinder3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, 0.41869, -0.624665, -0.58711)
 radius = 0.15
 height = 0.8
 
-[node name="LegFrontLeft" type="CSGCylinder3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -0.6)
+[node name="LegFrontLeft" type="CSGCylinder3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, -0.380913, -0.624665, -0.612295)
 radius = 0.15
 height = 0.8
 
-[node name="LegBackRight" type="CSGCylinder3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0.6)
+[node name="LegBackRight" type="CSGCylinder3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, 0.380913, -0.624665, 0.612295)
 radius = 0.15
 height = 0.8
 
-[node name="LegBackLeft" type="CSGCylinder3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0.6)
+[node name="LegBackLeft" type="CSGCylinder3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, -0.41869, -0.624665, 0.58711)
 radius = 0.15
 height = 0.8
 
-[node name="Tail" type="CSGCylinder3D" parent="CollisionPolygon3D"]
-transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0.7, -1.2)
+[node name="Tail" type="CSGCylinder3D" parent="CollisionShape3D"]
+transform = Transform3D(0.997692, -0.0596156, -0.0325122, 0.0524236, 0.371891, 0.926795, -0.0431604, -0.926361, 0.374157, 0.0377766, 0.0753345, -1.19941)
 radius = 0.1
 height = 0.8
 
-[node name="EarRight" type="CSGBox3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.2, 1.2)
+[node name="EarRight" type="CSGBox3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, 0.212099, 0.575335, 1.20728)
 size = Vector3(0.15, 0.3, 0.15)
 material = SubResource("StandardMaterial3D_3eaof")
 
-[node name="EarLeft" type="CSGBox3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.2, 1.2)
+[node name="EarLeft" type="CSGBox3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, -0.287653, 0.575335, 1.19154)
 size = Vector3(0.15, 0.3, 0.15)
 material = SubResource("StandardMaterial3D_60ffh")
 
-[node name="EyeRight" type="CSGSphere3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.9, 1.49259)
+[node name="EyeRight" type="CSGSphere3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, 0.152913, 0.275334, 1.49815)
 radius = 0.05
 material = SubResource("StandardMaterial3D_1")
 
-[node name="EyeLeft" type="CSGSphere3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.9, 1.48907)
+[node name="EyeLeft" type="CSGSphere3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, -0.246778, 0.275334, 1.48204)
 radius = 0.05
 material = SubResource("StandardMaterial3D_2")
 
-[node name="Nose" type="CSGSphere3D" parent="CollisionPolygon3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 1.8)
+[node name="Nose" type="CSGSphere3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999504, 0, -0.0314805, 0, 1, 0, 0.0314805, 0, 0.999504, -0.056665, 0.0253345, 1.79911)
 radius = 0.08
 material = SubResource("StandardMaterial3D_3")

@@ -12,7 +12,7 @@ extends CharacterBody3D
 @export var arrive_target:Node3D
 @export var slowing_distance = 20
 
-@export var banking:float = 1
+@export var banking:float = 0.2
 
 @export var damping:float = 0.3
 
@@ -21,6 +21,13 @@ extends CharacterBody3D
 
 @export var pursue_enabled = true
 @export var pursue_target:CharacterBody3D
+
+@export var wander_enable = true
+@export var wander_circle_distance = 100.0
+@export var wander_circle_radius = 50.0
+@export var wander_angle = 0.0
+var wander_angle_change = 0.5  # Radians per frame
+
 
 @export var offset_pursue_enabled = false
 @export var leader:CharacterBody3D
@@ -39,6 +46,26 @@ func offset_pursue(leader):
 		
 	return arrive(projected)
 
+func wander() -> Vector3:
+	var forward: Vector3
+	if velocity.length() > 0.1:
+		forward = velocity.normalized()
+	else:
+		forward = -transform.basis.z  # Default forward (facing direction in Godot 3D)
+
+	var circle_center = forward * wander_circle_distance
+
+	# Modify the wander angle slightly
+	wander_angle += randf_range(-wander_angle_change, wander_angle_change)
+
+	# Create displacement on the XZ plane
+	var displacement = Vector3(
+		cos(wander_angle),
+		0.0,
+		sin(wander_angle)
+	) * wander_circle_radius
+
+	return circle_center + displacement
 
 
 func pursue(pursue_target):
@@ -110,6 +137,8 @@ func calculate():
 		f += pursue(pursue_target)
 	if offset_pursue_enabled:
 		f += offset_pursue(leader)
+	if wander_enable:
+		f +=wander()
 	return f
 
 @export var path:Path3D
@@ -138,8 +167,8 @@ func _process(delta: float) -> void:
 	if velocity.length() > 0:
 		# Implement Banking as described:
 		# https://www.cs.toronto.edu/~dt/siggraph97-course/cwr87/
-		var tempUp = transform.basis.y.lerp(Vector3.UP + (accel * banking), delta * 5.0)
-		look_at(global_transform.origin - velocity, tempUp)
+		var tempUp = transform.basis.y.lerp(Vector3.UP + (accel * banking), delta * 2.0)
+		look_at(global_transform.origin - velocity)
 		
 		velocity = velocity.limit_length(max_speed)			
 		velocity = velocity - (velocity * damping * delta)

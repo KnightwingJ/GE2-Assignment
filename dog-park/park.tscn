@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://cv5cllbutu8xx"]
+[gd_scene load_steps=23 format=3 uid="uid://cv5cllbutu8xx"]
 
 [ext_resource type="Script" uid="uid://bidt4uptxh1bc" path="res://park.gd" id="1_ew778"]
 [ext_resource type="Script" uid="uid://b04jvh546k2aa" path="res://scripts/first_person_controller.gd" id="1_pccfp"]
 [ext_resource type="PackedScene" uid="uid://im4wm4x15rs4" path="res://models/dog-scene.tscn" id="2_lcr5t"]
+[ext_resource type="PackedScene" uid="uid://wjmxh6cqo3bh" path="res://models/ball.tscn" id="3_uktj1"]
 [ext_resource type="AudioStream" uid="uid://qkjevqh36th6" path="res://sounds/calling-whistle-41861.mp3" id="4_lcr5t"]
+[ext_resource type="PackedScene" uid="uid://b7nvsp3ngv865" path="res://control.tscn" id="6_di8ox"]
 
 [sub_resource type="Sky" id="Sky_ogds0"]
 
@@ -47,14 +49,25 @@ height = 2.5
 [sub_resource type="Curve3D" id="Curve3D_lcr5t"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 19.5398, 0, 0, -0.26, 0, 0, 0, -37.3469, 0, -5.2561, 0, 0, 0, 0, 0, 0, 0, 0, -15.3655),
-"tilts": PackedFloat32Array(0, 0, 0)
+"points": PackedVector3Array(7.005, 0, -0.35, -34.345, 0, 0, 2.395, 0, 20.33, -7.045, 0, -0.26, -11.125, 0, -22.47, -37.3469, 0, -5.2561, 0, 0, -12.365, 0, 0, 0, 0, 0, -15.3655, 18.56, 0, -10.535, 6.44, 0, 0, 3.3374, 0.0687209, -4.10227),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
 }
-point_count = 3
+point_count = 4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uktj1"]
+size = Vector3(1, 25, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_di8ox"]
+albedo_color = Color(0.42, 0.42, 0.42, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_baggn"]
+material = SubResource("StandardMaterial3D_di8ox")
+size = Vector3(1, 5, 50)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ew778")
 dog = ExtResource("2_lcr5t")
+ball = ExtResource("3_uktj1")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pccfp")
@@ -62,6 +75,7 @@ environment = SubResource("Environment_pccfp")
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 shape = SubResource("WorldBoundaryShape3D_20hy8")
 debug_color = Color(1, 1, 1, 0.42)
 
@@ -69,10 +83,12 @@ debug_color = Color(1, 1, 1, 0.42)
 mesh = SubResource("PlaneMesh_lcr5t")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.73527, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.7666, 0)
+shadow_enabled = true
+omni_range = 17.631
 
 [node name="Tree" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.4034, 1.47621, -9.28696)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9.4034, 1.47621, -9.28696)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tree"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
@@ -90,7 +106,7 @@ shape = SubResource("SphereShape3D_ew778")
 mesh = SubResource("SphereMesh_uktj1")
 
 [node name="Tree2" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5277, 1.47621, -14.2995)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 13.5277, 1.47621, -14.2995)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tree2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
@@ -108,7 +124,7 @@ shape = SubResource("SphereShape3D_ew778")
 mesh = SubResource("SphereMesh_uktj1")
 
 [node name="Tree3" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5124, 1.47621, 13.7289)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 9.5124, 1.47621, 13.7289)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tree3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
@@ -126,7 +142,7 @@ shape = SubResource("SphereShape3D_ew778")
 mesh = SubResource("SphereMesh_uktj1")
 
 [node name="Tree4" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3244, 1.47621, 10.0204)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -13.3244, 1.47621, 10.0204)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tree4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247525, 0)
@@ -180,14 +196,15 @@ shape = SubResource("SphereShape3D_ew778")
 mesh = SubResource("SphereMesh_uktj1")
 
 [node name="PlayerBody" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00555056, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01291, 0)
 script = ExtResource("1_pccfp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBody"]
 shape = SubResource("CapsuleShape3D_20hy8")
+debug_color = Color(0, 0, 0, 0.419608)
 
 [node name="Head" type="Node3D" parent="PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61624, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971175, 0)
 
 [node name="Camera3D" type="Camera3D" parent="PlayerBody/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0589895, 0)
@@ -196,5 +213,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0589895, 0)
 stream = ExtResource("4_lcr5t")
 
 [node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1298, 0.0453509, -0.020849)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7907, 0.0453509, 2.54085)
 curve = SubResource("Curve3D_lcr5t")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.8297, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+shape = SubResource("BoxShape3D_uktj1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+mesh = SubResource("BoxMesh_baggn")
+
+[node name="Wall2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.4928, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2"]
+shape = SubResource("BoxShape3D_uktj1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2"]
+mesh = SubResource("BoxMesh_baggn")
+
+[node name="Wall3" type="StaticBody3D" parent="."]
+transform = Transform3D(3.48846e-05, 0, 1, 0, 1, 0, -1, 0, 3.48846e-05, -0.565439, 0, -25.583)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3"]
+shape = SubResource("BoxShape3D_uktj1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall3"]
+mesh = SubResource("BoxMesh_baggn")
+
+[node name="Wall4" type="StaticBody3D" parent="."]
+transform = Transform3D(3.48846e-05, 0, 1, 0, 1, 0, -1, 0, 3.48846e-05, -0.565439, 0, 24.3741)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4"]
+shape = SubResource("BoxShape3D_uktj1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall4"]
+mesh = SubResource("BoxMesh_baggn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("6_di8ox")]
