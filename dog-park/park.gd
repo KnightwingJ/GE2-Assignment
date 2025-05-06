@@ -12,6 +12,7 @@ var dogs=[]
 
 
 func _ready() -> void:
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	for i in range(dog_count):
 		dog_instance = dog.instantiate()
 		var random_position = Vector3(
@@ -43,24 +44,26 @@ func _process(delta: float):
 
 func heel():
 	for dog_instance in dogs:
-			dog_instance.set_behaviours({
-			"seek": false,
-			"arrive": true,
-			"wander": false,
-			"path": false
-		})
-			dog_instance.arrive_target=$PlayerBody
+		dog_instance.set_behaviours({
+		"seek": false,
+		"arrive": true,
+		"wander": false,
+		"path": false
+	})
+		dog_instance.arrive_target=$PlayerBody
+		dog_instance.list_behaviour("Arrive")
 	timer.stop
 
 func run():
 	for dog_instance in dogs:
-			dog_instance.set_behaviours({
-			"seek": false,
-			"arrive": false,
-			"wander": true,
-			"path": false
-		})
-	timer.start()
+		dog_instance.set_behaviours({
+		"seek": false,
+		"arrive": false,
+		"wander": true,
+		"path": false
+	})
+		dog_instance.list_behaviour("Wander")
+		timer.start()
 
 func go():
 	for dog_instance in dogs:
@@ -71,6 +74,7 @@ func go():
 			"path": true
 		})
 		dog_instance.path=$Path3D
+		dog_instance.list_behaviour("Path")
 	timer.stop
 		
 func throw_ball():
@@ -104,6 +108,7 @@ func _on_ball_resting(position: Vector3):
 			"path": false
 		})
 		dog_instance.target = temp_target
+		dog_instance.list_behaviour("Seek")
 
 
 func _on_timer_timeout() -> void:
@@ -111,27 +116,30 @@ func _on_timer_timeout() -> void:
 	var behavivour_index=randi() % 3
 	match behavivour_index:
 		0:
-			dog_instance.set_behaviours({
+			random_dog.set_behaviours({
 			"seek": false,
 			"arrive": true,
 			"wander": false,
 			"path": false
 			})
-			dog_instance.arrive_target=$PlayerBody
+			random_dog.arrive_target=$PlayerBody
+			random_dog.list_behaviour("Arrive")
 		1:
-			dog_instance.set_behaviours({
+			random_dog.set_behaviours({
 			"seek": false,
 			"arrive": false,
 			"wander": true,
 			"path": false
 			})
+			random_dog.list_behaviour("Wander")
 		2:
-			dog_instance.set_behaviours({
+			random_dog.set_behaviours({
 			"seek": false,
 			"arrive": false,
 			"wander": false,
 			"path": true
 			})
-			dog_instance.path=$Path3D
+			random_dog.path=$Path3D
+			random_dog.list_behaviour("Path")
 	
 	pass # Replace with function body.

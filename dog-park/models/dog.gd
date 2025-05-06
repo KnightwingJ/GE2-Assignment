@@ -187,8 +187,10 @@ func set_behaviours(behaviors:Dictionary) -> void:
 	wander_enable = behaviors.get("wander", true)
 	path_follow_enabled = behaviors.get("path", false)
 	
-func _process(delta: float) -> void:
 	
+func list_behaviour(behaviour:String):
+	$Label3D.text=behaviour
+func _process(delta: float) -> void:
 	force = calculate()	
 	force.y=0
 	accel = force / mass	

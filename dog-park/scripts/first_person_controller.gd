@@ -26,6 +26,8 @@ func _input(event):
 		head.rotation_degrees.x = pitch
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
 
 func _physics_process(delta):
 	var input_dir = Vector3.ZERO
